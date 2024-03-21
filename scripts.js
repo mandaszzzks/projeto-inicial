@@ -15,7 +15,15 @@ var saida = document.getElementById("saida-de-dados");
 
  function alertar(event){
 // alert("Voce clicou no botao!!!" + " " + nome.value);
-
+const url = `https://viacep.com.br/ws/${cep.value}/json`;
+ 
+fetch(url)
+.then(resposta=>resposta.json())
+.then(dados=>{
+        logradouro.value = dados.logradouro;
+        bairro.value = dados.bairro;
+        cidade.value = dados.localidade;
+        Estado.value = dados.uf;
 // var numero = 7;
 // var resultado = numero % 2;
 // if(resultado == o){
@@ -23,6 +31,15 @@ var saida = document.getElementById("saida-de-dados");
 // } */
 
            saida.innerText = "Nome: " + nome.value + "\n Email: " + email.value;
+           "\n email: " + email.value +
+           "\n telefone: " + telefone.value +
+           "\n cep: " + cep.value +
+           "\n logradouro: " + logradouro.value +
+           "\n numero: " + numero.value +
+           "\n complemento: " + complemento.value +
+           "\n bairro: " + bairro.value +
+           "\n cidade: " + cidade.value +
+           "\n Estado: " + Estado.value;
 
-}
-    
+       })
+    }
