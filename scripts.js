@@ -1,5 +1,7 @@
-var botao = document.getElementById("botao");
-botao.addEventListener("click", alertar, false);
+           
+           
+           var botao = document.getElementById("botao");
+            botao.addEventListener("click", alertar, false);
 var nome = document.getElementById("nome");
 var email = document.getElementById("email");
 var telefone = document.getElementById("telefone");
@@ -20,14 +22,39 @@ var saida = document.getElementById("saida-de-dados");
 // if(resultado == o){
 //       alert("este numero é par!");s
 // } */
+                      //validação de dados
+                if(cep.value.lenght < 8 ){
+                    alert('Entre vom um cep válido!');
+                    return;
+                }
 
+                //formatar os dados
+                cep.velue = cep.value.replase('-','');
 
                 const url = `https://viacep.com.br/ws/${cep.value}/json`;
-                        fetch(url)
-                            .then(resposta=>resposta.json())
-                                .then(dados=>alert(dados.bairro))
-          
 
+                        fetch(url)
+                            .then( resposta=> {
+                            return resposta.jason();
+                            })
+                                      
+                            
+                            .then(dadosDoEndereco=>{
+                                    logradouro.value = dadosDoEndereco.logradouro;
+                                    bairro.value = dadosDoEndereco.bairro;
+                                    cidade.value = dadosDoEndereco.localidade;
+                                    Estado.value = dadosDoEndereco.uf;
+                                    complemento.value = dadosDoEndereco.complemento;
+                                               
+                                    saidaDeDados(); // chamada de função
+                                                                            })
+                                                                        
+                                .catch(function(e){
+                                    alert(e.menssage());
+                                });
+          
+                            
+    function saidaDeDados(){
            saida.innerText = "nome: " + nome.value + "\n email: " + email.value;
            "\n email: " + email.value +
            "\n telefone: " + telefone.value +
@@ -38,6 +65,5 @@ var saida = document.getElementById("saida-de-dados");
            "\n bairro: " + bairro.value +
            "\n cidade: " + cidade.value +
            "\n Estado: " + Estado.value;
-
-       }
-    
+    }
+}
